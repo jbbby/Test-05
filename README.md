@@ -12,9 +12,9 @@ docker run --rm -p 3000:3000 ghcr.io/jbbby/test-05:main
 Open [http://localhost:3000](http://localhost:3000) to see the Hello World
 response.
 
-Each push to `main` also creates the next patch Git tag (`vX.Y.Z`) and publishes
-the corresponding versioned container image. If no version tags exist yet, the
-first tag is `v0.0.1`; the container image tag omits the leading `v`.
+Each push to `main` also creates the next patch Git tag (`X.Y.Z`) and publishes
+the corresponding versioned container image with the same tag. If no version
+tags exist yet, the first tag is `0.0.1`.
 
 GHCR packages are private by default. To allow anyone to pull the image without
 authenticating, change the package visibility to **Public** in the package's

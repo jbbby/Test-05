@@ -1,7 +1,7 @@
 on:
   push:
     branches: ["**"]
-    tags: ["v*"]
+    tags: ["*"]
   pull_request:
 # jobs:
 #   build:
@@ -50,7 +50,7 @@ jobs:
             git fetch --tags origin
             latest_tag=""
             while IFS= read -r candidate; do
-              if [[ "$candidate" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              if [[ "$candidate" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
                 latest_tag="$candidate"
                 break
               fi
@@ -62,7 +62,7 @@ jobs:
             fi
             IFS=. read -r major minor patch <<< "$version"
             next_version="${major}.${minor}.$((patch + 1))"
-            next_tag="v${next_version}"
+            next_tag="$next_version"
 
             git tag "$next_tag" "$GITHUB_SHA"
             if git push origin "$next_tag"; then
@@ -92,7 +92,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Verify release tag is on main
         id: main-check
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         run: |
           git fetch origin main
           if git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
