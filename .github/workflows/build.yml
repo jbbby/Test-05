@@ -7,6 +7,7 @@ on:
 #   build:
 #     runs-on: ubuntu-latest
 jobs:
+  # Installs dependencies and verifies the web server responds as expected.
   build:
     runs-on: ubuntu-latest
     steps:
@@ -29,6 +30,7 @@ jobs:
             sleep 1
           done
           exit 1
+  # Creates and publishes the next patch-version Git tag on the main branch.
   tag:
     runs-on: ubuntu-latest
     needs: build
@@ -81,6 +83,7 @@ jobs:
 
           echo "Unable to create a unique patch tag after 5 attempts." >&2
           exit 1
+  # Builds and publishes the container image to GHCR when the event is eligible.
   publish:
     runs-on: ubuntu-latest
     needs: [build, tag]
