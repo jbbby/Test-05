@@ -1,6 +1,9 @@
 {
     "name": "simple",
     "main": "app.js",
+    "scripts": {
+        "test": "node --test"
+    },
     "dependencies": {
         "moment": "^2.31.0"
     }
