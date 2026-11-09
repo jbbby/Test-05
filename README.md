@@ -12,9 +12,10 @@ docker run --rm -p 3000:3000 ghcr.io/jbbby/test-05:main
 Open [http://localhost:3000](http://localhost:3000) to see the Hello World
 response.
 
-Run the unit tests locally with:
+Run lint and unit tests locally with:
 
 ```sh
+npm run lint
 npm test
 ```
 
