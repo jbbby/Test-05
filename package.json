@@ -2,9 +2,15 @@
     "name": "simple",
     "main": "app.js",
     "scripts": {
+        "lint": "eslint .",
         "test": "node --test"
     },
     "dependencies": {
         "moment": "^2.31.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "eslint": "^10.14.0",
+        "globals": "^17.14.0"
     }
 }
