@@ -129,7 +129,6 @@ jobs:
           images: ${{ steps.image.outputs.name }}
           tags: |
             type=ref,event=branch
-            type=ref,event=pr
             type=sha,prefix=sha-
             type=raw,value=${{ needs.tag.outputs.version }},enable=${{ needs.tag.outputs.version != '' }}
             type=semver,pattern={{version}},enable=${{ steps.main-check.outputs.on_main == 'true' }}

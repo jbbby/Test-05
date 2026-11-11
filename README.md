@@ -10,13 +10,13 @@ docker pull ghcr.io/jbbby/test-05:main
 docker run --rm -p 3000:3000 ghcr.io/jbbby/test-05:main
 ```
 
-Same-repository pull requests also publish an image tagged `pr-<number>` and
-with the commit SHA. To test a pull request before merging, replace `<number>`
-with its PR number:
+Same-repository pull requests also publish an image tagged with the commit SHA.
+To test a pull request before merging, replace `<short-sha>` with the short
+commit SHA shown in the PR:
 
 ```sh
-podman pull ghcr.io/jbbby/test-05:pr-<number>
-podman run --rm -p 3000:3000 ghcr.io/jbbby/test-05:pr-<number>
+podman pull ghcr.io/jbbby/test-05:sha-<short-sha>
+podman run --rm -p 3000:3000 ghcr.io/jbbby/test-05:sha-<short-sha>
 ```
 
 Images are not published for pull requests from forks.
