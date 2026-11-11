@@ -14,7 +14,7 @@ jobs:
   # Temporarily disabled; uncomment to restore container image vulnerability scanning.
   # trivy:
   #   runs-on: ubuntu-latest
-  #   needs: checks
+  #   needs: ci
   #   permissions:
   #     contents: read
   #   steps:
@@ -37,7 +37,7 @@ jobs:
   # Creates the next patch-version Git tag on the main branch.
   tag:
     runs-on: ubuntu-latest
-    needs: checks
+    needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       contents: write
@@ -94,8 +94,8 @@ jobs:
   # Builds and publishes the container image to GHCR when the event is eligible.
   publish:
     runs-on: ubuntu-latest
-    needs: [checks, tag]
-    if: always() && needs.checks.result == 'success' && (needs.tag.result == 'success' || needs.tag.result == 'skipped') && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
+    needs: [ci, tag]
+    if: always() && needs.ci.result == 'success' && (needs.tag.result == 'success' || needs.tag.result == 'skipped') && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository))
     permissions:
       contents: read
       packages: write
