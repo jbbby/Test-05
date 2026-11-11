@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  checks:
+  ci:
     uses: ./.github/workflows/ci.yml
   # Temporarily disabled; uncomment to restore container image vulnerability scanning.
   # trivy:
