@@ -1,13 +1,25 @@
 # Test-05
 
-Each push to a branch builds and publishes a container image to GitHub Container
-Registry (GHCR). The branch name and commit SHA are available as image tags. For
-example, to pull and run the latest image built from `main`:
+Pull requests run lint, unit tests, and a web server check. Pushes to `main`
+build and publish a multi-platform container image to GitHub Container Registry
+(GHCR), tagged with the generated version and commit SHA. To pull a version,
+replace `<version>` with the latest version tag created from a merged change:
 
 ```sh
-docker pull ghcr.io/jbbby/test-05:main
-docker run --rm -p 3000:3000 ghcr.io/jbbby/test-05:main
+podman pull ghcr.io/jbbby/test-05:<version>
+podman run --rm -p 3000:3000 ghcr.io/jbbby/test-05:<version>
 ```
+
+Same-repository pull requests also publish an image tagged with the commit SHA.
+To test a pull request before merging, replace `<short-sha>` with the short
+commit SHA shown in the PR:
+
+```sh
+podman pull ghcr.io/jbbby/test-05:sha-<short-sha>
+podman run --rm -p 3000:3000 ghcr.io/jbbby/test-05:sha-<short-sha>
+```
+
+Images are not published for pull requests from forks.
 
 Open [http://localhost:3000](http://localhost:3000) to see the Hello World
 response.
