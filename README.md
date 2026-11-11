@@ -2,12 +2,12 @@
 
 Pull requests run lint, unit tests, and a web server check. Pushes to `main`
 build and publish a multi-platform container image to GitHub Container Registry
-(GHCR), tagged with the branch name and commit SHA. For example, to pull and run
-the latest image built from `main`:
+(GHCR), tagged with the generated version and commit SHA. To pull a version,
+replace `<version>` with the latest version tag created from a merged change:
 
 ```sh
-docker pull ghcr.io/jbbby/test-05:main
-docker run --rm -p 3000:3000 ghcr.io/jbbby/test-05:main
+podman pull ghcr.io/jbbby/test-05:<version>
+podman run --rm -p 3000:3000 ghcr.io/jbbby/test-05:<version>
 ```
 
 Same-repository pull requests also publish an image tagged with the commit SHA.
